@@ -1,8 +1,6 @@
-# Gradient-Boosting-Regression
 # Overview of Assignment
 
-This assignment required the student to modify a prebuilt Spring Boot Application.
-The application is a store that sells model rockets and parts.
+The student was required to implement a machine learning method that uses an ensemble of decision trees to predict public health risk and compute feature importance.
 
 ## Technology used:
 
@@ -15,9 +13,9 @@ Pycharm 2025.3.1
 ### OS:
 Windows 11 
 
-## How to Run the App (if IntelliJ is installed)
+## How to Run the Program (if using PyCharm)
 1.  Copy the URL of this repository by clicking Code on the repository's homepage and, under Clone, select HTTPS, then click Copy URL to clipboard.
-2.  Open IntelliJ, and in the upper right, there is a button called Clone Repository; click it.
+2.  Open PyCharm, and in the upper left, there is a button called Clone Repository; click it.
 3.  You will be prompted for the version control source, URL, and Directory.
 4.  For version control, select Git, then paste the copied URL into the field labeled URL.
 6.  Also, you will see a field labeled Directory.  Choose a name for the Project's folder.
