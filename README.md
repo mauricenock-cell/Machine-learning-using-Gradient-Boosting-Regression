@@ -6,14 +6,11 @@ The application is a store that sells model rockets and parts.
 
 ## Technology used:
 
-### Front End:
-HTML, CSS
-
-### Back End:
-Spring Boot 2.6.6, Java 21.0.11
+### Language:
+Python
 
 ### IDE:
-IntelliJ IDEA 2026.1
+Pycharm 2025.3.1
 
 ### OS:
 Windows 11 
