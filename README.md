@@ -7,6 +7,9 @@ The student was required to implement a machine learning method that uses an ens
 ### Language:
 Python
 
+### Libraries:
+Pandas, scikit-learn, NumPy, SHAP, statsmodels
+
 ### IDE:
 Pycharm 2025.3.1
 
@@ -19,16 +22,15 @@ Windows 11
 3.  You will be prompted for the version control source, URL, and Directory.
 4.  For version control, select Git, then paste the copied URL into the field labeled URL.
 6.  Also, you will see a field labeled Directory.  Choose a name for the Project's folder.
-7.  Click Clone.  
-8.  After the project loads, click the green triangular-shaped button.  This is located at the top of the window near the center. This will start the application.
-9.  To view the application, open a browser and type http://localhost:8080 in the address bar, then press Enter.  The application will run here.
+7.  Click Clone.
+8.  After the project loads, open the file main.py.
+9.  To run the program, click the green triangular-shaped button in the upper right of the window.
 
-
-Overview:
+## Overview:
 
 This is a regression task (used to predict continuous values), and Gradient Boosting Regression will be used. The dataset consists of 1000 rows, 35 columns/features, and shows the relationship between air quality, weather conditions, and public health. The aim is to compute feature importance to determine which factors have the greatest impact on public health risk.
 
-Data Cleaning/Feature Engineering:
+## Data Cleaning/Feature Engineering:
 
 First, let's examine the columns/features of the dataset. The first column is named datetimeEpoch. This is the time at which data is collected for a given data point, expressed as the number of seconds since January 1, 1970. Computers can perform mathematical operations more easily on date-time values expressed this way than in the mm/dd/yyyy format.
 
@@ -111,7 +113,7 @@ VIF printout:
 
 There are 6 features whose VIF values surpass the threshold of 5. These values are possibly the result of high pairwise correlations that have not been rectified. The pairs feelslike and heatIndex, uvindex and solarradiation, and humidity and dew still correlate highly with each other. The pairs are still present because either the members of a given pair were thought to be dissimilar constructs, or the correlational threshold of 0.8 was not met. Removing a feature from each pair should reduce the VIF value of the remaining feature of each pair.
 
-The feature heatIndex stands out with a VIF value above 5. Earlier, a decision was made not to remove either heatIndex or feelslike, due to information suggesting that they may have been dissimilar constructs. Still, heatIndex's VIF value, which is above 5, suggests that it can cause issues associated with multicollinearity if not removed; therefore, it will be removed, and its proxy, feelslike, will be kept.
+The feature heatIndex also stands out with a VIF value above 5. Earlier, a decision was made not to remove either heatIndex or feelslike, due to information suggesting that they may have been dissimilar constructs. Still, heatIndex's VIF value, which is above 5, suggests that it can cause issues associated with multicollinearity if not removed; therefore, it will be removed, and its proxy, feelslike, will be kept.
 
 Features dew and humidity are highly correlated at 0.71, but are not the same thing. The feature humidity is the relative humidity, which is the amount of water vapor currently present in the air relative to the amount that the air is capable of holding at the current temperature. The feature dew is the dew point. The dew point is the temperature at which water vapor will condense into water droplets. If absolute humidity is higher, then the water vapor will condense into water droplets at a higher temperature. Dew point is more closely related to absolute humidity than relative humidity, and the feature in this data set that represents it has higher variance and correlates more highly with the target variable, so the feature humidity, which represents relative humidity, will be removed.
 
@@ -123,7 +125,7 @@ Updated VIF values:
 
 All values are now under 5; therefore, multicollinearity has been reduced to an acceptable level (there are still two features with VIF values of roughly 4, but these will be left alone since the threshold of 5 isn't met).
 
-Model:
+## Model:
 
 Before deriving values of feature importance, a model has to be created. Gradient Boosted Regression will be used.
 
@@ -146,8 +148,7 @@ Model accuracy (test set):
 ![](images/image14.png)
 
 
-Results/Feature Importance (SHAP):
-
+## Results/Feature Importance (SHAP):
 
 Rank of importance (Bar plot):
 
@@ -168,5 +169,5 @@ Looking at both plots, the hierarchy of importance is close to what one would ex
 Reflection/Improvements:
 
 1. The time of day was extracted from the feature datetimeEpoch, and a new feature called time_of_day was created. Originally, this feature was one-hot encoded, but the fact that the feature was periodic was overlooked initially. It was decided to undo the one-hot encoding and return the feature to its initial state (according to some sources, periodic features should be left in the original state when used with decision trees). The model's accuracy was slightly higher with one-hot encoding than with leaving the feature in its original state. Also, Cyclical encoding was considered, but was not implemented because it is a bad choice both theoretically and in practice. Still, Cyclical encoding should have been implemented to see what effect it would have on the model's accuracy. In some cases, it can work well with a particular dataset.
-2. Also, the removal of features to address collinearity/multicollinearity can be automated with the Python library called collinearity. This will be considered for future projects.
+2. Also, the removal of features to address collinearity/multicollinearity can be automated with a Python library called collinearity. This will be considered for future projects.
 3. At times, it was concluded that some feature pairs had similar variance. This was concluded because the values of variance seemed to be close together numerically (for example, 2.068 vs 2.1). This may have been erroneous. A test called the F-test can be used to determine whether the difference in variance between features is significant. For this test to be used, the features must follow a normal distribution. If the features are not normal, Levene's test is used. A similar mistake was made with correlation coefficients.
